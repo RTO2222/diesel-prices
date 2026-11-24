@@ -1,0 +1,38 @@
+name: Weekly diesel prices
+
+on:
+  schedule:
+    # Sundays at 23:17 UTC (23:17 GMT in winter, 00:17 Monday BST in summer)
+    - cron: "17 23 * * 0"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Fetch prices
+        env:
+          SEARCH_LAT: ${{ secrets.SEARCH_LAT }}
+          SEARCH_LNG: ${{ secrets.SEARCH_LNG }}
+        run: python scripts/fetch_prices.py
+
+      - name: Commit changes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898333+github-actions[bot]@users.noreply.github.com"
+          git add prices README.md
+          if git diff --cached --quiet; then
+            echo "No changes"
+          else
+            git commit -m "Weekly diesel prices $(date -u +%F)"
+            git push
+          fi
