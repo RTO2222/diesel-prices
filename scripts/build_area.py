@@ -20,9 +20,10 @@ ROOT = Path(__file__).resolve().parent.parent
 OSRM = "https://router.project-osrm.org/route/v1/driving/"
 
 # (lat, lng)
-M60_A5103 = (53.4142, -2.2625)     # M60 J5 / A5103 Princess Parkway, Northenden
-M60_M56 = (53.4049, -2.2196)       # M60 J4 / M56 J1, Kingsway Interchange (waypoint)
-M60_GATLEY = (53.4128, -2.2420)    # waypoint on the M60 between J4 and J5
+M60_A5103 = (53.4135, -2.2602)     # M60 J5 / A5103 Princess Parkway, Northenden
+M60_CHEADLE = (53.3976, -2.2010)   # waypoint on the M60 at Cheadle (J2/J3)
+M60_M56 = (53.3985, -2.2284)       # waypoint on the M60 at the M56 junction (J4)
+M60_GATLEY = (53.4023, -2.2450)    # waypoint on the M60 between J4 and J5
 M56_J3 = (53.3959, -2.2538)        # waypoint on the M56 at Sharston
 M56_J5 = (53.3748, -2.2875)        # waypoint on the M56 at the airport junction
 M56_A538 = (53.3622, -2.2962)      # M56 J6 / A538
@@ -87,7 +88,7 @@ def main():
     m56 = [M60_A5103, M56_J3, M56_J5, M56_A538]
     ring += one_way(route(*m56), m56)
     ring += [[lng, lat] for lat, lng in CORNERS]
-    m60 = [M60_BREDBURY, M60_STOCKPORT, M60_M56, M60_GATLEY, M60_A5103]
+    m60 = [M60_BREDBURY, M60_STOCKPORT, M60_CHEADLE, M60_M56, M60_GATLEY, M60_A5103]
     ring += one_way(route(*m60), m60)
     if ring[0] != ring[-1]:
         ring.append(ring[0])
