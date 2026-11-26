@@ -1,6 +1,6 @@
 # Diesel prices
 
-Standard diesel (B7) prices at filling stations within 10 miles of a fixed point, cheapest first. Premium diesel is not included.
+Standard diesel (B7) prices at filling stations inside a set search area, cheapest first. Premium diesel is not included.
 
 A GitHub Action refreshes the list every night. Each day's list is kept in [`prices/history/`](prices/history/), and the latest is in [`prices/latest.csv`](prices/latest.csv).
 
@@ -97,6 +97,6 @@ _Last checked: 2026-11-26. 80 stations._
 
 ## How it works
 
-- `scripts/fetch_prices.py` asks fuel-finder.uk for the stations within 10 miles of the search point and writes the CSV files and the table above.
+- `scripts/fetch_prices.py` asks fuel-finder.uk for the stations around the search area, keeps only those inside it, and writes the CSV files and the table above.
 - `.github/workflows/weekly-prices.yml` runs it every day at 23:17 UTC and commits any changes. You can also run it by hand from the Actions tab ("Run workflow").
-- The search point is kept in two repository secrets, `SEARCH_LAT` and `SEARCH_LNG`, so it isn't in the code.
+- The search area is the polygon in [`area.geojson`](area.geojson). Its motorway edges were traced along the M56 and M60 by `scripts/build_area.py`, which you run from the Actions tab ("Build search area") if the corners ever change.

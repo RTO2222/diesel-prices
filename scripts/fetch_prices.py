@@ -3,14 +3,15 @@
 search point and write them to prices/latest.csv, a dated copy in
 prices/history/, and the table in README.md.
 
-The search point is read from the SEARCH_LAT and SEARCH_LNG environment
-variables (stored as GitHub Actions secrets) so it never appears in the repo.
-Prices come from the UK Government Fuel Finder feed, via fuel-finder.uk.
+Only stations inside the search area in area.geojson are kept (see
+scripts/build_area.py). Prices come from the UK Government Fuel Finder feed,
+via fuel-finder.uk.
 """
 
 import csv
 import datetime as dt
 import json
+import math
 import os
 import re
 import sys
@@ -19,17 +20,51 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-RADIUS_MILES = float(os.environ.get("RADIUS_MILES", "10"))
 API = "https://www.fuel-finder.uk/api/stations/"
-COLUMNS = ["Station", "Postcode", "Diesel (p/litre)", "Brand", "Address", "Price reported"]
+COLUMNS = ["Station", "Postcode", "Diesel (p/litre)", "Brand", "Address", "Price reported", "Lat", "Lng"]
+README_COLUMNS = 6  # the README table leaves out Lat and Lng
 
 
-def fetch(lat: str, lng: str) -> list[dict]:
+def load_area() -> list[list[float]]:
+    geo = json.loads((ROOT / "area.geojson").read_text(encoding="utf-8"))
+    return geo["features"][0]["geometry"]["coordinates"][0]  # [lng, lat]
+
+
+def miles_between(lat1, lng1, lat2, lng2) -> float:
+    r = 3958.8
+    p1, p2 = math.radians(lat1), math.radians(lat2)
+    dp, dl = p2 - p1, math.radians(lng2 - lng1)
+    a = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * r * math.asin(math.sqrt(a))
+
+
+def search_circle(ring):
+    """A circle that covers the whole area, for the API query."""
+    lngs, lats = [p[0] for p in ring], [p[1] for p in ring]
+    clat, clng = (min(lats) + max(lats)) / 2, (min(lngs) + max(lngs)) / 2
+    radius = max(miles_between(clat, clng, lat, lng) for lng, lat in ring) + 0.5
+    return clat, clng, radius
+
+
+def inside(lat, lng, ring) -> bool:
+    """Ray-casting point-in-polygon test."""
+    hit = False
+    j = len(ring) - 1
+    for i in range(len(ring)):
+        xi, yi = ring[i]
+        xj, yj = ring[j]
+        if (yi > lat) != (yj > lat) and lng < (xj - xi) * (lat - yi) / (yj - yi) + xi:
+            hit = not hit
+        j = i
+    return hit
+
+
+def fetch(lat: float, lng: float, radius: float) -> list[dict]:
     query = urllib.parse.urlencode({
         "lat": lat,
         "lng": lng,
         "fuel_type": "diesel",
-        "radius": RADIUS_MILES,
+        "radius": round(radius, 2),
         "sort": "price",
         "pricing_mode": "pump",
     })
@@ -59,7 +94,7 @@ def tidy(text: str) -> str:
     return text.strip()
 
 
-def to_rows(stations: list[dict]) -> list[list]:
+def to_rows(stations: list[dict], ring) -> list[list]:
     rows = []
     for s in stations:
         if s.get("temporary_closure") or s.get("permanent_closure"):
@@ -67,7 +102,9 @@ def to_rows(stations: list[dict]) -> list[list]:
         price = s.get("price_diesel")
         if price is None:
             continue
-        if s.get("distance") is not None and float(s["distance"]) > RADIUS_MILES:
+        if s.get("lat") is None or s.get("lng") is None:
+            continue
+        if not inside(float(s["lat"]), float(s["lng"]), ring):
             continue
         reported = (s.get("price_last_updated_iso") or "")[:10]
         rows.append([
@@ -77,6 +114,8 @@ def to_rows(stations: list[dict]) -> list[list]:
             s.get("brand", ""),
             tidy(s.get("address", "")),
             reported,
+            f"{float(s['lat']):.5f}",
+            f"{float(s['lng']):.5f}",
         ])
     rows.sort(key=lambda r: (float(r[2]), r[0]))
     return rows
@@ -96,11 +135,11 @@ def update_readme(rows: list[list], checked: str) -> None:
     lines = [
         f"_Last checked: {checked}. {len(rows)} stations._",
         "",
-        "| " + " | ".join(COLUMNS) + " |",
-        "|" + "|".join(["---"] * len(COLUMNS)) + "|",
+        "| " + " | ".join(COLUMNS[:README_COLUMNS]) + " |",
+        "|" + "|".join(["---"] * README_COLUMNS) + "|",
     ]
     for r in rows:
-        cells = list(r)
+        cells = list(r[:README_COLUMNS])
         cells[2] = f"{cells[2]}p"
         lines.append("| " + " | ".join(c.replace("|", "/") for c in cells) + " |")
     table = "\n".join(lines)
@@ -114,12 +153,11 @@ def update_readme(rows: list[list], checked: str) -> None:
 
 
 def main() -> int:
-    lat, lng = os.environ.get("SEARCH_LAT"), os.environ.get("SEARCH_LNG")
-    if not lat or not lng:
-        print("SEARCH_LAT and SEARCH_LNG must be set (repository secrets).", file=sys.stderr)
-        return 1
-    stations = fetch(lat, lng)
-    rows = to_rows(stations)
+    ring = load_area()
+    clat, clng, radius = search_circle(ring)
+    print(f"Searching {radius:.1f} miles around the middle of the area")
+    stations = fetch(clat, clng, radius)
+    rows = to_rows(stations, ring)
     if not rows:
         print("No stations with diesel prices returned; leaving files unchanged.", file=sys.stderr)
         return 1

@@ -20,9 +20,6 @@ jobs:
           python-version: "3.12"
 
       - name: Fetch prices
-        env:
-          SEARCH_LAT: ${{ secrets.SEARCH_LAT }}
-          SEARCH_LNG: ${{ secrets.SEARCH_LNG }}
         run: python scripts/fetch_prices.py
 
       - name: Commit changes
