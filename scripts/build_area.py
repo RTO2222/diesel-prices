@@ -46,11 +46,46 @@ def route(*points):
     return r["geometry"]["coordinates"]  # [lng, lat]
 
 
+def progress_along(pt, ref):
+    """Distance along the reference polyline `ref` ([lng, lat] points) of the
+    point on it nearest to `pt`, in rough flat units (fine at this scale)."""
+    k = 0.6  # cos(53 deg): squash longitude so distances are roughly even
+    px, py = pt[0] * k, pt[1]
+    best_d, best_s, run = None, 0.0, 0.0
+    for (ax, ay), (bx, by) in zip(ref, ref[1:]):
+        ax, bx = ax * k, bx * k
+        dx, dy = bx - ax, by - ay
+        seg = (dx * dx + dy * dy) ** 0.5
+        t = 0.0 if seg == 0 else max(0.0, min(1.0, ((px - ax) * dx + (py - ay) * dy) / (seg * seg)))
+        cx, cy = ax + t * dx, ay + t * dy
+        d = (px - cx) ** 2 + (py - cy) ** 2
+        if best_d is None or d < best_d:
+            best_d, best_s = d, run + t * seg
+        run += seg
+    return best_s
+
+
+def one_way(coords, waypoints):
+    """Drop the doubling-back that routing does around junctions, keeping only
+    points that move further along the motorway than any point before them."""
+    ref = [[lng, lat] for lat, lng in waypoints]
+    kept, best = [], -1.0
+    for p in coords:
+        s = progress_along(p, ref)
+        if s > best:
+            kept.append(p)
+            best = s
+    print(f"  kept {len(kept)} of {len(coords)} vertices")
+    return kept
+
+
 def main():
     ring = []
-    ring += route(M60_M56, M56_J3, M56_J5, M56_A538)
+    m56 = [M60_M56, M56_J3, M56_J5, M56_A538]
+    ring += one_way(route(*m56), m56)
     ring += [[lng, lat] for lat, lng in CORNERS]
-    ring += route(M60_BREDBURY, M60_STOCKPORT, M60_M56)
+    m60 = [M60_BREDBURY, M60_STOCKPORT, M60_M56]
+    ring += one_way(route(*m60), m60)
     if ring[0] != ring[-1]:
         ring.append(ring[0])
     geo = {
