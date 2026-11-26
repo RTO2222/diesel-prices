@@ -43,7 +43,9 @@ def fetch(lat: str, lng: str) -> list[dict]:
     )
     with urllib.request.urlopen(req, timeout=60) as resp:
         data = json.load(resp)
-    return data.get("stations", [])
+    stations = data.get("stations", [])
+    print(f"API returned {len(stations)} stations; stats: {json.dumps(data.get('stats'))[:500]}")
+    return stations
 
 
 def tidy(text: str) -> str:
