@@ -19,7 +19,7 @@ import urllib.request
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-RADIUS_MILES = float(os.environ.get("RADIUS_MILES", "5"))
+RADIUS_MILES = float(os.environ.get("RADIUS_MILES", "10"))
 API = "https://www.fuel-finder.uk/api/stations/"
 COLUMNS = ["Station", "Postcode", "Diesel (p/litre)", "Brand", "Address", "Price reported"]
 
