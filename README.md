@@ -9,7 +9,7 @@ The prices come from the UK Government Fuel Finder feed (The Motor Fuel Price (O
 ## Latest prices
 
 <!-- PRICES:START -->
-_Last checked: 2026-11-26. 28 stations._
+_Last checked: 2026-11-26. 30 stations._
 
 | Station | Postcode | Diesel (p/litre) | Brand | Address | Price reported |
 |---|---|---|---|---|---|
@@ -23,9 +23,11 @@ _Last checked: 2026-11-26. 28 stations._
 | The Tower Garage Ltd | SK9 7QB | 187.9p | The Tower Garage Ltd | Highams, Tower Buildings, Wilmslow Road, Alderley Edge, Sk9 7Qb, Alderley Edge | 2026-11-25 |
 | Asda Great Moor Express Petrol | SK2 6HA | 188.9p | Esso | 172-6 Buxton Road, Stockport | 2026-11-25 |
 | Asda Hazel Grove Express Petrol | SK7 6AF | 188.9p | BP | Buxton Road, Stockport | 2026-11-24 |
+| Asda Royle Green Express Petrol | M22 4SY | 189.9p | BP | Longley Lane, Manchester | 2026-11-25 |
 | Cheadle Hulme SF Connect | SK8 7JL | 189.9p | BP | Church Road, Cheadle Hulme | 2026-11-25 |
 | MFG Civic Centre | M22 5RG | 189.9p | BP | Rowlands Way, Manchester | 2026-11-25 |
 | MFG Red Lion | SK8 2AJ | 189.9p | Esso | 83A Stockport Road, Cheadle | 2026-11-23 |
+| Rontec St Hildas | M22 4FW | 189.9p | Esso | Palatine Road, Manchester | 2026-11-24 |
 | Sainsburys Cheadle | SK8 3BB | 189.9p | Sainsburys | Wilmslow Road, Cheadle | 2026-11-24 |
 | Bramhall Esso Express | SK7 1JR | 190.9p | Esso | 37-41 Woodford Rd, Stockport | 2026-11-25 |
 | Wilmslow Handforth Extra - Petrol Filling Station | SK9 3PA | 190.9p | Tesco | Tesco Stores Ltd, Kiln Croft Lane, Handforth, Wilmslow | 2026-11-24 |
