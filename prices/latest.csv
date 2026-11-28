@@ -1,31 +1,31 @@
 Station,Postcode,Diesel (p/litre),Brand,Address,Price reported,Lat,Lng
 Asda Grosvenor Express Petrol,SK1 3UA,185.9,Esso,"Wellington New Road, Stockport",2026-11-26,53.40300,-2.15700
+MFG Morrisons Cheadle Heath,SK3 0RL,185.9,Morrisons,"Edgeley Road, Edgeley",2026-11-27,53.39997,-2.18727
 Asda Great Moor Express Petrol,SK2 6HA,186.9,Esso,"172-6 Buxton Road, Stockport",2026-11-26,53.39300,-2.14700
-MFG Morrisons Cheadle Heath,SK3 0RL,186.9,Morrisons,"Edgeley Road, Edgeley",2026-11-26,53.39997,-2.18727
+Hazel Grove Esso Express,SK7 6DT,186.9,Esso,"99 Macclesfield Road, Stockport",2026-11-27,53.36684,-2.11305
+MFG Hall Street,SK1 4DA,186.9,Shell,"Hall Street, Offerton, Stockport",2026-11-28,53.40819,-2.14787
+Sainsburys Hazel Grove,SK7 4AW,186.9,Sainsburys,"London Road, Hazel Grove, Stockport",2026-11-27,53.38472,-2.12475
 Asda Hazel Grove Express Petrol,SK7 6AF,187.9,BP,"Buxton Road, Stockport",2026-11-26,53.37347,-2.10893
 Asda Stockport Express Petrol,SK2 7NR,187.9,Asda,"297-309 Buxton Road, Stockport",2026-11-20,53.38923,-2.13822
-Hazel Grove Esso Express,SK7 6DT,187.9,Esso,"99 Macclesfield Road, Stockport",2026-11-25,53.36684,-2.11305
 MFG Bramhall,SK7 2BE,187.9,Shell,"Ack Lane, Bramhall, Stockport",2026-11-25,53.35760,-2.16715
-MFG Hall Street,SK1 4DA,187.9,Shell,"Hall Street, Offerton, Stockport",2026-11-25,53.40819,-2.14787
-Sainsburys Hazel Grove,SK7 4AW,187.9,Sainsburys,"London Road, Hazel Grove, Stockport",2026-11-22,53.38472,-2.12475
+MFG Civic Centre,M22 5RG,187.9,BP,"Rowlands Way, Manchester",2026-11-27,53.37810,-2.26114
+MFG Red Lion,SK8 2AJ,187.9,Esso,"83A Stockport Road, Cheadle",2026-11-27,53.39540,-2.20739
 The Tower Garage Ltd,SK9 7QB,187.9,The Tower Garage Ltd,"Highams, Tower Buildings, Wilmslow Road, Alderley Edge, Sk9 7Qb, Alderley Edge",2026-11-25,53.30495,-2.23743
-MFG Civic Centre,M22 5RG,188.9,BP,"Rowlands Way, Manchester",2026-11-26,53.37810,-2.26114
+Asda Royle Green Express Petrol,M22 4SY,188.9,BP,"Longley Lane, Manchester",2026-11-27,53.40158,-2.25381
+BP Offerton green service station,SK2 5AU,188.9,BP,"Offerton green service station, Marple road, Stockport",2026-11-27,53.40758,-2.16156
 Rontec St Hildas,M22 4FW,188.9,Esso,"Palatine Road, Manchester",2026-11-26,53.41001,-2.25663
+Sainsburys Cheadle,SK8 3BB,188.9,Sainsburys,"Wilmslow Road, Cheadle",2026-11-27,53.37805,-2.21662
+Tgc - Styal Road,M22 5WX,188.9,Shell,"Styal Road, Manchester",2026-11-27,53.36395,-2.24278
 Airport City SF Connect,WA15 0AF,189.9,BP,"2B Sunbank Lane, Manchester",2026-11-26,53.35680,-2.29100
 Asda Altrincham Road Express Petrol,SK9 5NN,189.9,Texaco,"Altrincham Road, Wilmslow",2026-11-26,53.33243,-2.25411
-Asda Royle Green Express Petrol,M22 4SY,189.9,BP,"Longley Lane, Manchester",2026-11-25,53.40158,-2.25381
 Asda Wilmslow Express Petrol,SK9 5EH,189.9,Asda,"Hawthorne Street, Wilmslow",2026-11-26,53.32645,-2.23820
-BP Offerton green service station,SK2 5AU,189.9,BP,"Offerton green service station, Marple road, Stockport",2026-11-26,53.40758,-2.16156
 Bramhall Esso Express,SK7 1JR,189.9,Esso,"37-41 Woodford Rd, Stockport",2026-11-26,53.35620,-2.16446
 Cheadle Hulme SF Connect,SK8 7JL,189.9,BP,"Church Road, Cheadle Hulme",2026-11-25,53.36662,-2.18788
-MFG Red Lion,SK8 2AJ,189.9,Esso,"83A Stockport Road, Cheadle",2026-11-23,53.39540,-2.20739
-Sainsburys Cheadle,SK8 3BB,189.9,Sainsburys,"Wilmslow Road, Cheadle",2026-11-24,53.37805,-2.21662
-Tgc - Styal Road,M22 5WX,189.9,Shell,"Styal Road, Manchester",2026-11-26,53.36395,-2.24278
 Wilmslow SF Connect,SK9 1HT,189.9,BP,"Alderley Road, Wilmslow",2026-11-26,53.32564,-2.23052
+Shell Dean Row,SK9 2LN,190.9,Shell,"Adlington Road, Wilmslow",2026-11-27,53.33057,-2.19238
 Wilmslow Handforth Extra - Petrol Filling Station,SK9 3PA,190.9,Tesco,"Tesco Stores Ltd, Kiln Croft Lane, Handforth, Wilmslow",2026-11-24,53.34953,-2.20594
-Shell Dean Row,SK9 2LN,192.9,Shell,"Adlington Road, Wilmslow",2026-11-26,53.33057,-2.19238
-Macclesfield Hibel Rd Superstore - Petrol Filling Station,SK10 2AB,193.9,Tesco,"Hibel Rd, Macclesfield",2026-11-26,53.26417,-2.12250
+Macclesfield Hibel Rd Superstore - Petrol Filling Station,SK10 2AB,192.9,Tesco,"Hibel Rd, Macclesfield",2026-11-27,53.26417,-2.12250
 Asda Macclesfield Express Petrol,SK11 9JR,194.9,Esso,"Churchill Way, Macclesfield",2026-11-25,53.26000,-2.12800
-Shell Broken Cross,SK11 8TU,196.9,Shell,"147 147 Broken Cross, Macclesfield",2026-11-25,53.25953,-2.16019
-Shell Little Waitrose Tytherington,SK10 2JJ,196.9,Shell,"Manchester Road, Macclesfield",2026-11-25,53.27535,-2.12829
+Shell Broken Cross,SK11 8TU,195.9,Shell,"147 147 Broken Cross, Macclesfield",2026-11-27,53.25953,-2.16019
+Shell Little Waitrose Tytherington,SK10 2JJ,195.9,Shell,"Manchester Road, Macclesfield",2026-11-27,53.27535,-2.12829
 Pexall service station Ltd,SK11 9PG,199.9,Gulf,"Pexall Service Station, Chelford Road,  Henbury, Macclesfield",2026-11-23,53.25945,-2.18528
